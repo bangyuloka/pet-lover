@@ -61,7 +61,7 @@ h1 {
 
 .gift-icon {
   position: relative;
-  width: 4vw;
+  width: 5vw;
   margin-left: 0.5vw;
   margin-right: 1vw;
   z-index: 1;
@@ -87,9 +87,17 @@ h1 {
   position: absolute;
   top: 0;
   right: 0;
-  width: 8px;
+  width: 8vw; /* Lebar bendera */
   height: 100%;
-  background: repeating-linear-gradient(45deg, #e6e6e6 , #e6e6e6 4px, transparent 4px, transparent 8px);
+
+   background-color: #fff; /* Fallback warna */
+  background-image: 
+    linear-gradient(45deg, #000 25%, transparent 25%),
+    linear-gradient(-45deg, #000 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #000 75%),
+    linear-gradient(-45deg, transparent 75%, #000 75%);
+  background-size: 40px 40px; /* Ukuran kotak */
+  background-position: 0 0, 0 20px, 20px -20px, -20px 0;
 }
 
 #scoreboard {
