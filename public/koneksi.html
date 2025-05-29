@@ -65,22 +65,21 @@
     <div class="status" id="status"></div>
   </div>
 
-  <script>
-    const ws = new WebSocket(`ws://${window.location.host}`);
+  <script src="/socket.io/socket.io.js"></script>
+<script>
+  const socket = io();
 
-    function koneksi() {
-      const username = document.getElementById('username').value.trim();
-      if (username) {
-        ws.send(JSON.stringify({ action: 'connect', username }));
-      }
+  function koneksi() {
+    const username = document.getElementById('username').value.trim();
+    if (username) {
+      socket.emit('connectTikTok', username);
     }
+  }
 
-    ws.onmessage = (event) => {
-      const data = JSON.parse(event.data);
-      if (data.message) {
-        document.getElementById('status').innerText = data.message;
-      }
-    };
-  </script>
+  socket.on('status', (msg) => {
+    document.getElementById('status').innerText = msg;
+  });
+</script>
+
 </body>
 </html>

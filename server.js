@@ -1,16 +1,16 @@
 const express = require('express');
 const path = require('path');
 const fs = require('fs');
-const WebSocket = require('ws');
-const { connect: connectTikTok, onGift } = require('./tiktok'); // Import tiktok.js
+const { Server } = require('socket.io');
+const { createServer } = require('http');
+const { connect: connectTikTok, onGift } = require('./tiktok');
 
 const app = express();
-const server = require('http').createServer(app);
-const wss = new WebSocket.Server({ server });
+const server = createServer(app);
+const io = new Server(server);
 
 const raceFile = path.join(__dirname, 'race.json');
 
-// Mapping gift TikTok ke pet
 const giftMap = {
   5655: 'kucing',
   5827: 'anjing',
@@ -19,7 +19,6 @@ const giftMap = {
   5778: 'ikan'
 };
 
-// Load data dari JSON
 function loadRaceData() {
   if (!fs.existsSync(raceFile)) {
     fs.writeFileSync(raceFile, JSON.stringify({
@@ -32,56 +31,34 @@ function loadRaceData() {
   return JSON.parse(fs.readFileSync(raceFile));
 }
 
-// Save data ke JSON
 function saveRaceData(data) {
   fs.writeFileSync(raceFile, JSON.stringify(data, null, 2));
 }
 
-// Serve file static
 app.use(express.static(path.join(__dirname, 'public')));
-app.get('/admin', (req, res) => {
-  res.sendFile(path.join(__dirname, 'admin.html'));
-});
-app.get('/koneksi', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public/koneksi.html'));
-});
+app.get('/admin', (req, res) => res.sendFile(path.join(__dirname, 'admin.html')));
+app.get('/koneksi', (req, res) => res.sendFile(path.join(__dirname, 'public/koneksi.html')));
 
-// WebSocket logic
-wss.on('connection', (ws) => {
+io.on('connection', (socket) => {
   console.log('🟢 Client terhubung.');
 
-  ws.on('message', async (message) => {
-    const text = message.toString();
-    console.log('Pesan diterima:', text);
-    const data = JSON.parse(text);
-    const race = loadRaceData();
+  const race = loadRaceData();
+  socket.emit('raceData', { ...race, winner: null, reset: false });
 
-    // Handle input username TikTok
-    if (data.action === 'connect' && data.username) {
-      await connectTikTok(data.username);
-      ws.send(JSON.stringify({ message: `✅ Terkoneksi dengan TikTok: ${data.username}` }));
-      return;
-    }
-
-    // Handle simulasi manual (opsional)
-    if (data.pet && race.positions.hasOwnProperty(data.pet)) {
-      processGift(data.pet);
-    }
+  socket.on('connectTikTok', async (username) => {
+    await connectTikTok(username);
+    socket.emit('status', `✅ Terkoneksi dengan TikTok: ${username}`);
   });
 
-  const race = loadRaceData();
-  race.winner = null;
-  race.reset = false;
-  ws.send(JSON.stringify(race));
+  socket.on('simulasiGift', (pet) => {
+    processGift(pet);
+  });
 });
 
-// Fungsi proses gift
 function processGift(pet) {
   const race = loadRaceData();
 
-  if (race.status === "finished") {
-    race.status = "running";
-  }
+  if (race.status === "finished") race.status = "running";
 
   race.positions[pet] += 1;
   race.steps[pet] += 1;
@@ -89,7 +66,6 @@ function processGift(pet) {
   let winner = null;
   let resetTriggered = false;
 
-  // Cek skor 10 - Prioritas
   for (let p in race.scores) {
     if (race.scores[p] >= 10) {
       for (let x in race.scores) {
@@ -116,20 +92,9 @@ function processGift(pet) {
 
   saveRaceData(race);
 
-  const broadcast = {
-    ...race,
-    winner: !resetTriggered ? winner : null,
-    reset: resetTriggered
-  };
-
-  wss.clients.forEach(client => {
-    if (client.readyState === WebSocket.OPEN) {
-      client.send(JSON.stringify(broadcast));
-    }
-  });
+  io.emit('raceData', { ...race, winner: !resetTriggered ? winner : null, reset: resetTriggered });
 }
 
-// Integrasi TikTok Gift ke Pet Race
 onGift((gift) => {
   const pet = giftMap[gift.gift_id];
   if (pet) {
@@ -140,8 +105,7 @@ onGift((gift) => {
   }
 });
 
-// Start server
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 server.listen(PORT, () => {
   console.log(`✅ Server berjalan di http://localhost:${PORT}`);
 });

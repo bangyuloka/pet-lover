@@ -19,12 +19,13 @@
   <button onclick="sendGift('burung')">Burung</button>
   <button onclick="sendGift('ikan')">Ikan</button>
 
-  <script>
-    const socket = new WebSocket('ws://localhost:3000');
-    function sendGift(pet) {
-      const profile = ""; // placeholder kalau perlu
-      socket.send(JSON.stringify({ pet }));
-    }
-  </script>
+ <script src="/socket.io/socket.io.js"></script>
+<script>
+  const socket = io();
+
+  function sendGift(pet) {
+    socket.emit('simulasiGift', pet);
+  }
+</script>
 </body>
 </html>

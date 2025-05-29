@@ -1,4 +1,4 @@
-const socket = new WebSocket(`ws://${window.location.host}`);
+const socket = io();
 
 const pets = {
   kucing: document.getElementById('pet-kucing'),
@@ -9,6 +9,7 @@ const pets = {
 };
 
 const maxSteps = 12;
+
 function getStepPx() {
   const track = document.getElementById('race-track');
   const finishLine = document.getElementById('finish-line');
@@ -19,14 +20,12 @@ function getStepPx() {
 let raceFinished = false;
 let lastWinner = null;
 
-socket.onmessage = (event) => {
-  const data = JSON.parse(event.data);
-
+socket.on('raceData', (data) => {
   // Update posisi hewan
- for (let pet in data.positions) {
-  const px = data.positions[pet] * getStepPx();
-  pets[pet].style.left = `${px}px`;
-}
+  for (let pet in data.positions) {
+    const px = data.positions[pet] * getStepPx();
+    pets[pet].style.left = `${px}px`;
+  }
 
   // Update klasemen
   const tableBody = document.getElementById('score-table');
@@ -62,7 +61,7 @@ socket.onmessage = (event) => {
       raceFinished = false;
     }, 3000);
   }
-};
+});
 
 function capitalize(str) {
   return str.charAt(0).toUpperCase() + str.slice(1);
