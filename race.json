@@ -1,22 +1,22 @@
 {
   "positions": {
-    "kucing": 6,
+    "kucing": 4,
     "anjing": 7,
-    "ayam": 0,
-    "burung": 0,
-    "ikan": 0
+    "ayam": 1,
+    "burung": 4,
+    "ikan": 3
   },
   "steps": {
-    "kucing": 6,
+    "kucing": 4,
     "anjing": 7,
-    "ayam": 0,
-    "burung": 0,
-    "ikan": 0
+    "ayam": 1,
+    "burung": 4,
+    "ikan": 3
   },
   "scores": {
-    "kucing": 4,
+    "kucing": 0,
     "anjing": 0,
-    "ayam": 0,
+    "ayam": 1,
     "burung": 0,
     "ikan": 0
   },

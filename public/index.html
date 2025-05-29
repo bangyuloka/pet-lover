@@ -7,36 +7,48 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <h1>Pet Lover</h1>
+  <div class="main-container">
+    <h1>Pet Lover</h1>
 
-  <div id="race-track">
-    <div class="lane" id="lane-kucing">
-      <img src="images/5655.png" class="gift-icon">
-      <img src="images/kucing.png" class="pet" id="pet-kucing">
-      <span class="last-winner hidden">Last Winner !!</span>
-    </div>
-    <div class="lane" id="lane-anjing">
-      <img src="images/5827.png" class="gift-icon">
-      <img src="images/anjing.png" class="pet" id="pet-anjing">
-      <span class="last-winner hidden">Last Winner !!</span>
-    </div>
-    <div class="lane" id="lane-ayam">
-      <img src="images/6064.png" class="gift-icon">
-      <img src="images/ayam.png" class="pet" id="pet-ayam">
-      <span class="last-winner hidden">Last Winner !!</span>
-    </div>
-    <div class="lane" id="lane-burung">
-      <img src="images/5269.png" class="gift-icon">
-      <img src="images/burung.png" class="pet" id="pet-burung">
-      <span class="last-winner hidden">Last Winner !!</span>
-    </div>
-    <div class="lane" id="lane-ikan">
-      <img src="images/5778.png" class="gift-icon">
-      <img src="images/ikan.png" class="pet" id="pet-ikan">
-      <span class="last-winner hidden">Last Winner !!</span>
-    </div>
+    <div id="race-track">
+      <div class="lane" id="lane-kucing">
+        <img src="images/5655.png" class="gift-icon">
+        <div class="pet-wrapper">
+          <img src="images/kucing.png" class="pet" id="pet-kucing">
+        </div>
+        <span class="last-winner hidden">Last Winner !!</span>
+      </div>
+      <div class="lane" id="lane-anjing">
+        <img src="images/5827.png" class="gift-icon">
+        <div class="pet-wrapper">
+          <img src="images/anjing.png" class="pet" id="pet-anjing">
+        </div>
+        <span class="last-winner hidden">Last Winner !!</span>
+      </div>
+      <div class="lane" id="lane-ayam">
+        <img src="images/6064.png" class="gift-icon">
+        <div class="pet-wrapper">
+          <img src="images/ayam.png" class="pet" id="pet-ayam">
+        </div>
+        <span class="last-winner hidden">Last Winner !!</span>
+      </div>
+      <div class="lane" id="lane-burung">
+        <img src="images/5269.png" class="gift-icon">
+        <div class="pet-wrapper">
+          <img src="images/burung.png" class="pet" id="pet-burung">
+        </div>
+        <span class="last-winner hidden">Last Winner !!</span>
+      </div>
+      <div class="lane" id="lane-ikan">
+        <img src="images/5778.png" class="gift-icon">
+        <div class="pet-wrapper">
+          <img src="images/ikan.png" class="pet" id="pet-ikan">
+        </div>
+        <span class="last-winner hidden">Last Winner !!</span>
+      </div>
 
-    <div id="finish-line"></div>
+      <div id="finish-line"></div>
+    </div>
   </div>
 
   <div id="scoreboard">
@@ -60,16 +72,14 @@
   </div>
   
   <video id="winner-video" class="hidden" autoplay playsinline>
-  <source src="animation/animasi1.webm" type="video/webm" />
-</video>
+    <source src="animation/animasi1.webm" type="video/webm" />
+  </video>
 
-<video id="reset-video" class="hidden" autoplay playsinline>
-  <source src="animation/animasi2.webm" type="video/webm" />
-</video>
+  <video id="reset-video" class="hidden" autoplay playsinline>
+    <source src="animation/animasi2.webm" type="video/webm" />
+  </video>
 
-<script src="/socket.io/socket.io.js"></script>
-<script src="script.js"></script>
-  
-  
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>

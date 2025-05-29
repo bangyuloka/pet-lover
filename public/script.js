@@ -11,10 +11,8 @@ const pets = {
 const maxSteps = 12;
 
 function getStepPx() {
-  const track = document.getElementById('race-track');
-  const finishLine = document.getElementById('finish-line');
-  const trackWidth = finishLine.getBoundingClientRect().left - track.getBoundingClientRect().left;
-  return trackWidth / maxSteps;
+  const trackWidth = document.getElementById('race-track').clientWidth;
+  return (trackWidth - 6 * window.innerWidth / 100) / maxSteps;
 }
 
 let raceFinished = false;
