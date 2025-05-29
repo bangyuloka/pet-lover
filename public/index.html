@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pet Lover</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <h1>Pet Lover</h1>
+
+  <div id="race-track">
+    <div class="lane" id="lane-kucing">
+      <img src="images/5655.png" class="gift-icon">
+      <img src="images/kucing.png" class="pet" id="pet-kucing">
+      <span class="last-winner hidden">Last Winner !!</span>
+    </div>
+    <div class="lane" id="lane-anjing">
+      <img src="images/5827.png" class="gift-icon">
+      <img src="images/anjing.png" class="pet" id="pet-anjing">
+      <span class="last-winner hidden">Last Winner !!</span>
+    </div>
+    <div class="lane" id="lane-ayam">
+      <img src="images/6064.png" class="gift-icon">
+      <img src="images/ayam.png" class="pet" id="pet-ayam">
+      <span class="last-winner hidden">Last Winner !!</span>
+    </div>
+    <div class="lane" id="lane-burung">
+      <img src="images/5269.png" class="gift-icon">
+      <img src="images/burung.png" class="pet" id="pet-burung">
+      <span class="last-winner hidden">Last Winner !!</span>
+    </div>
+    <div class="lane" id="lane-ikan">
+      <img src="images/5778.png" class="gift-icon">
+      <img src="images/ikan.png" class="pet" id="pet-ikan">
+      <span class="last-winner hidden">Last Winner !!</span>
+    </div>
+
+    <div id="finish-line"></div>
+  </div>
+
+  <div id="scoreboard">
+    <h2>Klasemen</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>POS</th>
+          <th>TIM</th>
+          <th>POIN</th>
+        </tr>
+      </thead>
+      <tbody id="score-table">
+        <!-- Data klasemen akan diisi oleh JavaScript -->
+      </tbody>
+    </table>
+  </div>
+
+  <div id="winner-overlay" class="hidden">
+    <h2><span id="winner-pet"></span> Menang!</h2>
+  </div>
+  
+  <video id="winner-video" class="hidden" autoplay playsinline>
+  <source src="animation/animasi1.webm" type="video/webm" />
+</video>
+
+<video id="reset-video" class="hidden" autoplay playsinline>
+  <source src="animation/animasi2.webm" type="video/webm" />
+</video>
+
+  <script src="script.js"></script>
+  
+  
+</body>
+</html>

@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "express": "^5.1.0",
+    "tiktok-live-connector": "^2.0.3",
+    "ws": "^8.18.2"
+  }
+}

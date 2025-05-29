@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Animasi Pemenang</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: black;
+      overflow: hidden;
+    }
+    video {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+    }
+  </style>
+</head>
+<body>
+  <video autoplay playsinline>
+    <source src="animation/animasi1.webm" type="video/webm" />
+    Your browser does not support the video tag.
+  </video>
+
+  <script>
+    // Tutup halaman setelah animasi selesai (optional)
+    document.querySelector('video').addEventListener('ended', () => {
+      window.close(); // Jika pop-up atau tab baru
+      // Atau redirect kembali
+      window.location.href = 'index.html';
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+{
+  "positions": {
+    "kucing": 3,
+    "anjing": 0,
+    "ayam": 10,
+    "burung": 10,
+    "ikan": 0
+  },
+  "steps": {
+    "kucing": 3,
+    "anjing": 0,
+    "ayam": 10,
+    "burung": 10,
+    "ikan": 0
+  },
+  "scores": {
+    "kucing": 8,
+    "anjing": 2,
+    "ayam": 0,
+    "burung": 1,
+    "ikan": 5
+  },
+  "status": "finished"
+}
